@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registraton Page</title>
+    <style>
+        .danger {
+            color: red;
+        }
+    </style>
+    <!--CSS FILE LINK-->
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+    <div id="current_location">
+        <ul>
+            <li>
+                <a href="index.html" title="Logout Page">
+                    Back/
+                </a>
+                <a href="registration.html" style="color: grey;">Registration Page</a>
+            </li>
+
+        </ul>
+    </div>
+    <table border="1" cellspacing="0" cellpadding="10" id="display">
+        <tr>
+            <th colspan="2">
+                <h2>Registration Form</h2>
+                <span class="danger" id="errorMsg"></span>
+            </th>
+        </tr>
+        <form action="PHP/register.php" method="POST" onsubmit="return validate()" autocomplete="off">
+
+            <tr>
+                <td>
+                    <label for="userName">Username:</label>
+                </td>
+                <td>
+                    <input type="text" name="username" id="userName" onblur="username1()">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="newPassword">Password:</label>
+                </td>
+                <td>
+                    <input type="password" name="newpassword" id="newPassword" onblur="newpassword1()">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="repeatPassword">Repeat-Password:</label>
+                </td>
+                <td>
+                    <input type="password" name="repeatpassword" id="repeatPassword" onblur="repeatpassword1()">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Register" id="register"></td>
+                </td>
+            </tr>
+        </form>
+        <tr>
+            <td colspan="2">
+                <ul style="text-align: left;list-style: none;">
+                    Note:
+                    <li>Password must be min 8 to max 25 Character</li>
+                    <li>Password must contain 1 or more Uppercase</li>
+                    <li>Password must contain 1 or more Lowercase</li>
+                    <li>Password must contain 1 or more Special Character[! @ # $ % ^ & *]</li>
+                    <li>Password must contain 1 or more Digit Character</li>
+                    <li>For eg:Hello@12</li>
+                </ul>
+            </td>
+        </tr>
+
+    </table>
+    <script>
+        un = document.getElementById("userName");
+        np = document.getElementById("newPassword");
+        rp = document.getElementById("repeatPassword");
+        format1 = /^([A-Za-z]{1,})+$/;
+        format2 = /^([A-Z]{1,})([a-z]{1,})([!@#$%^&*]{1,})([0-9]{1,})+$/;
+
+        function username1() {
+            if (!format1.test(un.value) || (un.value).length < 3) {
+                document.getElementById("errorMsg").innerHTML = "Use alphabets only with minimum 3-digits!";
+            } else {
+                document.getElementById("errorMsg").innerHTML = "";
+            }
+        }
+
+        function newpassword1() {
+            if (!format2.test(np.value)) {
+                document.getElementById("errorMsg").innerHTML = "Provide New Password in required format!" + np.value;
+            } else
+            if ((np.value).length > 25) {
+                document.getElementById("errorMsg").innerHTML = "Password Exceeded 25 character!";
+            } else if ((np.value).length <= 7) {
+                document.getElementById("errorMsg").innerHTML = "Please enter atleast 8 character";
+            } else {
+                document.getElementById("errorMsg").innerHTML = "";
+            }
+        }
+
+        function repeatpassword1() {
+            if (np.value != rp.value) {
+                document.getElementById("errorMsg").innerHTML = "Repeat-Password does not Match!";
+            } else {
+                document.getElementById("errorMsg").innerHTML = "";
+            }
+        }
+
+        function validate() {
+            if (un.value == '') {
+                document.getElementById("errorMsg").innerHTML = "please fill username field";
+                return false;
+            } else if (np.value == '') {
+                document.getElementById("errorMsg").innerHTML = "please fill new password field";
+                return false;
+            } else if (rp.value == '') {
+                document.getElementById("errorMsg").innerHTML = "please fill repeat password field";
+                return false;
+            } else if (!format1.test(un.value) || (un.value).length < 3) {
+                document.getElementById("errorMsg").innerHTML = "Use alphabets only with minimum 3-digits!";
+                return false;
+            } else if (!format2.test(np.value)) {
+                document.getElementById("errorMsg").innerHTML = "Provide New Password in required format!" + np.value;
+                return false;
+            } else if ((np.value).length > 25) {
+                document.getElementById("errorMsg").innerHTML = "Password Exceeded 25 character!";
+                return false;
+            } else if ((np.value).length <= 7) {
+                document.getElementById("errorMsg").innerHTML = "Please enter atleast 8 character";
+                return false;
+            } else if (np.value != rp.value) {
+                document.getElementById("errorMsg").innerHTML = "Repeat-Password does not Match!";
+                return false;
+            } else {
+                document.getElementById("errorMsg").innerHTML = "";
+                return true;
+            }
+        }
+    </script>
+</body>
+
+</html>

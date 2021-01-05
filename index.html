@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <style>
+        .danger {
+            color: red;
+        }
+    </style>
+    <!--CSS FILE LINK-->
+    <link rel="stylesheet" href="CSS/style.css">
+
+</head>
+
+<body>
+    <div id="current_location">
+        <ul>
+            <li>
+                <a href="index.html" title="Login Page">
+                    Index/
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    <table border="1" cellspacing="0" cellpadding="10" id="display">
+        <form action="PHP/login.php" method="POST" onsubmit="return validate()" autocomplete="off">
+
+            <tr>
+                <th colspan="2">
+                    <h1 id="loginform">Login Form</h1>
+                    <span class="danger" id="errorMsg"></span>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <label for="text"> Username:<span class="danger">*</span></label>
+                </td>
+                <td>
+                    <input type="text" name="username" id="userName" title="Please enter username!">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password"> Password:<span class="danger">*</span></label>
+                </td>
+                <td>
+                    <input type="password" name="password" id="passWord" title="Please enter password!">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="LOGIN"></td>
+            </tr>
+        </form>
+        <tr>
+            <td colspan="2">Are you a new user?<a href="registration.html">Register Here!</a></td>
+        </tr>
+
+
+    </table>
+
+    <script>
+        un = document.getElementById("userName");
+        np = document.getElementById("passWord");
+
+        function validate() {
+            if (un.value == '') {
+                document.getElementById("errorMsg").innerHTML = "please fill username field";
+                return false;
+            } else if (np.value == '') {
+                document.getElementById("errorMsg").innerHTML = "please fill password field";
+                return false;
+            } else {
+                document.getElementById("errorMsg").innerHTML = "";
+                return true;
+            }
+        }
+    </script>
+</body>
+
+</html>
